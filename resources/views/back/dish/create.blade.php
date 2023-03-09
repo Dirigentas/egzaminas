@@ -22,6 +22,9 @@
                 <textarea required name="description" class="form-control" placeholder="Aprašymas" id="floatingTextarea2" style="height: 100px"></textarea>
                 <label for="floatingTextarea2">Aprašymas</label>
             </div>
+            <label class="form-label">Nuotrauka</label>
+            <input class="form-control form-control-lg mb-4" type="file" name="photo">
+
             <button type="submit" class="btn btn-outline-info">Sukurti</button>
             @csrf
         </form>
