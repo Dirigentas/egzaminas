@@ -37,6 +37,7 @@ Route::prefix('admin/dish')->name('dish-')->group(function () {
 
 Route::get('/index', [F::class, 'index'])->name('index')->middleware('roles:A|K'); 
 Route::get('/show/{firm}', [F::class, 'show'])->name('show')->middleware('roles:A|K');
+Route::get('/showDish/{menu}', [F::class, 'showDish'])->name('showDish')->middleware('roles:A|K');
 Route::post('add', [F::class, 'addToCart'])->name('add-to-cart');
 Route::get('/cart', [F::class, 'cart'])->name('cart');
 Route::post('/cart', [F::class, 'updateCart'])->name('update-cart');

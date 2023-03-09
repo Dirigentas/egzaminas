@@ -60,18 +60,43 @@ class FrontController extends Controller
         ]);
     }
 
-    public function show(Firm $firm, Dish $dish)
+    public function show(Firm $firm, Menu $menu)
     {
         $user = Auth::user();
 
         $menu = $firm->tablesConnection()->get();
+        // $dish = $menu->tablesConnection()->get();
         
         return view('front.firm', [
             'firm' => $firm,
             'menu' => $menu,
+            // 'dish' => $dish,
+            'user' => $user
+        ]);
+    }
+
+    public function showDish(Menu $menu)
+    {
+        $user = Auth::user();
+
+        // $menu = $firm->tablesConnection()->get();
+        $dish = $menu->tablesConnection()->get();
+        
+        return view('front.dish', [
+            // 'firm' => $firm,
+            // 'menu' => $menu,
             'dish' => $dish,
             'user' => $user
         ]);
+    }
+
+    public function addToCart(Request $request, CartService $cart)
+    {
+        $id = (int) $request->dish;
+        $count = (int) $request->count;
+        $cart->add($id, $count);
+
+        return redirect()->back()->with('ok', 'Patiekalas pridėtas į užsakymą');
     }
 
 
