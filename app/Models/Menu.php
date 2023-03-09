@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vaikas extends Model
+class Menu extends Model
 {
     use HasFactory;
 
@@ -26,3 +26,5 @@ class Vaikas extends Model
         'desc_price' => 'Kaina nuo didžiausios',
     ];
 }
+
+?>

@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Vaikas;
-use App\Models\Tevas;
+use App\Models\Menu;
+use App\Models\Firm;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class VaikasController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $vaikas = Vaikas::all();
+        $menu = Menu::all();
 
-        return view('back.vaikas.index', [
-            'vaikas' => $vaikas
+        return view('back.menu.index', [
+            'menu' => $menu
         ]);
     }
 
@@ -27,10 +27,10 @@ class VaikasController extends Controller
      */
     public function create()
     {
-        $tevas = Tevas::all();
+        $firm = Firm::all();
         
-        return view('back.vaikas.create', [
-            'tevas' => $tevas
+        return view('back.menu.create', [
+            'firm' => $firm
         ]);
     }
 
@@ -39,7 +39,7 @@ class VaikasController extends Controller
      */
     public function store(Request $request)
     {
-        $vaikas = new Vaikas;
+        $menu = new Menu;
 
         if ($request->file('photo')) {
             $photo = $request->file('photo');
@@ -51,13 +51,13 @@ class VaikasController extends Controller
 
             $photo->move(public_path().'/', $file);
 
-            $vaikas->photo = '/'. $file;
+            $menu->photo = '/'. $file;
         }
 
-        $vaikas->restaurant = $request->restaurant;
-        $vaikas->name = $request->name;
-        $vaikas->price = $request->price;
-        $vaikas->save();
+        $menu->restaurant = $request->restaurant;
+        $menu->name = $request->name;
+        $menu->price = $request->price;
+        $menu->save();
 
         return redirect()->back()->with('ok', 'Pridėta sėkmingai');
     }
@@ -65,23 +65,23 @@ class VaikasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vaikas $vaikas)
+    public function edit(Menu $menu)
     {
-        $tevas = Tevas::all();
+        $firm = Firm::all();
 
-        return view('back.vaikas.edit', [
-            'tevas' => $tevas,
-            'vaikas' => $vaikas
+        return view('back.menu.edit', [
+            'firm' => $firm,
+            'menu' => $menu
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Vaikas $vaikas)
+    public function update(Request $request, Menu $menu)
     {
         if ($request->delete_photo) {
-            $vaikas->deletePhoto();
+            $menu->deletePhoto();
             return redirect()->back();
         }
 
@@ -92,18 +92,18 @@ class VaikasController extends Controller
             $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
             $file = $name. '-' . rand(100000, 999999). '.' . $ext;
             
-            if ($vaikas->photo) {
-                $vaikas->deletePhoto();
+            if ($menu->photo) {
+                $menu->deletePhoto();
             }
             
             $photo->move(public_path().'/', $file);
-            $vaikas->photo = '/'. $file;
+            $menu->photo = '/'. $file;
         }
 
-        $vaikas->restaurant = $request->restaurant;
-        $vaikas->name = $request->name;
-        $vaikas->price = $request->price;
-        $vaikas->save();
+        $menu->restaurant = $request->restaurant;
+        $menu->name = $request->name;
+        $menu->price = $request->price;
+        $menu->save();
 
         return redirect()->back()->with('ok', 'Informacija atnaujinta sėkmingai');
     }
@@ -111,10 +111,10 @@ class VaikasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vaikas $vaikas)
+    public function destroy(Menu $menu)
     {
-        $vaikas->deletePhoto();
-        $vaikas->delete();
+        $menu->deletePhoto();
+        $menu->delete();
         
         return redirect()->back()->with('ok', 'Įrašas ištrintas sėkmingai');
     }

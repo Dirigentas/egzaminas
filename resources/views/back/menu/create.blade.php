@@ -9,10 +9,10 @@
         <div class='card-header'>
             <h5 class="card-title text-center">Nauja kortelė</h5>
         </div>
-        <form class="card-body" action='{{route('vaikas-store')}}' method='post' enctype="multipart/form-data">
+        <form class="card-body" action='{{route('menu-store')}}' method='post' enctype="multipart/form-data">
             <label class="form-label">Restoranas</label>
             <select class="form-select form-select-lg mb-4" name='restaurant'>
-                @foreach($tevas as $value)
+                @foreach($firm as $value)
                 <option value="{{$value->name}}">{{$value->name}}</option>
                 @endforeach
             </select>

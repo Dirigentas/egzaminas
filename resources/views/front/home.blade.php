@@ -12,8 +12,8 @@
                 <div class="col-3">
                     <select class="form-select" name="id">
                         <option value="all">Sąrašas</option>
-                        @foreach($tevas as $t)
-                        <option value="{{$t->id}}" @if($t->id == $tevasShow) selected @endif>{{$t->name}}</option>
+                        @foreach($firm as $f)
+                        <option value="{{$f->id}}" @if($f->id == $firmShow) selected @endif>{{$f->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -39,22 +39,22 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        @foreach($vaikas as $v)
+        @foreach($menu as $m)
         <div class="col-6 mt-5">
-            @if($v->photo)
-            <img class='img-fluid img-thumbnail' src='{{asset($v->photo)}}'>
+            @if($m->photo)
+            <img class='img-fluid img-thumbnail' src='{{asset($m->photo)}}'>
             @else
             <img class='img-fluid img-thumbnail' src='{{asset('http://localhost/bandomasis/public/no.jpg')}}'>
 
             @endif
-            <div> {{$v->restaurant}}</div>
-            <div class='fw-bold col'> {{$v->name}}</div>
-            <div> {{round($v->price, 0)}} Eur</div>
+            <div> {{$m->restaurant}}</div>
+            <div class='fw-bold col'> {{$m->name}}</div>
+            <div> {{round($m->price, 0)}} Eur</div>
             <div>
-                Įvertinimas: {{$v->rating}}
+                Įvertinimas: {{$m->rating}}
             </div>
             @if(isset($user))
-            <form class='mt-3' action="{{route('update_rating', $v)}}" method="post" enctype="multipart/form-data">
+            <form class='mt-3' action="{{route('update_rating', $m)}}" method="post" enctype="multipart/form-data">
                 <label>Tavo įvertinimas: </label>
                 <input required type="number" min="1" max='5' name="rating">
                 <button type="submit" class="col-12 mt-3 btn btn-outline-primary">Įvertinti</button>

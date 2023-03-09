@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     const ROLES = [
         'A' => 'administratorius',
-        'N' => 'naudotojas'
+        'K' => 'klientas'
     ];
 
     /**

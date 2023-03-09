@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Front;
-use App\Models\Tevas;
-use App\Models\Vaikas;
+use App\Models\Firm;
+use App\Models\Menu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,40 +22,40 @@ class FrontController extends Controller
             $s = explode(' ', $request->s);
             
             if(count($s) == 1) {
-                $vaikas = Vaikas::where('name', 'like', '%'.$s[0].'%');
+                $menu = Menu::where('name', 'like', '%'.$s[0].'%');
             }
             else {
-                $vaikas = Vaikas::where('name', 'like', '%'.$s[0].'%'.$s[1].'%')->orWhere('name', 'like', '%'.$s[1].'%'.$s[0].'%');
+                $menu = Menu::where('name', 'like', '%'.$s[0].'%'.$s[1].'%')->orWhere('name', 'like', '%'.$s[1].'%'.$s[0].'%');
             }
         } else {      
             if ($request->id && $request->id != 'all') {
-                $vaikas = Vaikas::where('id', $request->id);
+                $menu = Menu::where('id', $request->id);
             }
             else {
-                $vaikas = Vaikas::where('id', '>', 0);
+                $menu = Menu::where('id', '>', 0);
             }
         }
 
-        $vaikas = match($request->sort ?? '') {
-            'asc_price' => $vaikas->orderBy('price'),
-            'desc_price' => $vaikas->orderBy('price', 'desc'),
-            default => $vaikas
+        $menu = match($request->sort ?? '') {
+            'asc_price' => $menu->orderBy('price'),
+            'desc_price' => $menu->orderBy('price', 'desc'),
+            default => $menu
         };
         
-         $vaikas = $vaikas->get();
+         $menu = $menu->get();
 
          $user = Auth::user();
 
-         $tevas = Tevas::all()->sortBy('name');
+         $firm = Firm::all()->sortBy('name');
 
         return view('front.home', [
-            'vaikas' => $vaikas,
-            'sortSelect' => Vaikas::SORT,
-            'sortShow' => isset(Vaikas::SORT[$request->sort]) ? $request->sort : '',
+            'menu' => $menu,
+            'sortSelect' => Menu::SORT,
+            'sortShow' => isset(Menu::SORT[$request->sort]) ? $request->sort : '',
             's' => $request->s ?? '',
             'user' => $user,
-            'tevas' => $tevas,
-            'tevasShow' => $request->id ? $request->id : '',
+            'firm' => $firm,
+            'firmShow' => $request->id ? $request->id : '',
         ]);
     }
 

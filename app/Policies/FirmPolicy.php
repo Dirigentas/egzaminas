@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
-use App\Models\Vaikas;
+use App\Models\Firm;
 use App\Models\User;
 
-class VaikasPolicy
+class FirmPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class VaikasPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Vaikas $vaikas): bool
+    public function view(User $user, Firm $firm): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class VaikasPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Vaikas $vaikas): bool
+    public function update(User $user, Firm $firm): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class VaikasPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Vaikas $vaikas): bool
+    public function delete(User $user, Firm $firm): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class VaikasPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Vaikas $vaikas): bool
+    public function restore(User $user, Firm $firm): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class VaikasPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Vaikas $vaikas): bool
+    public function forceDelete(User $user, Firm $firm): bool
     {
         //
     }

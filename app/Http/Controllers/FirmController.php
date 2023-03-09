@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tevas;
-use App\Models\Vaikas;
+use App\Models\Firm;
+use App\Models\Menu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class TevasController extends Controller
+class FirmController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tevas = Tevas::all();
+        $firm = Firm::all();
 
-        return view('back.tevas.index', [
-            'tevas' => $tevas
+        return view('back.firm.index', [
+            'firm' => $firm
         ]);
     }
 
@@ -27,7 +27,7 @@ class TevasController extends Controller
      */
     public function create()
     {
-        return view('back.tevas.create');
+        return view('back.firm.create');
     }
 
     /**
@@ -55,13 +55,13 @@ class TevasController extends Controller
                 return redirect()->back()->withErrors($validator);
             }
 
-        $tevas = new Tevas;
-        $tevas->name = $request->name;
-        $tevas->city = $request->city;
-        $tevas->address = $request->address;
-        $tevas->start = $request->start;
-        $tevas->end = $request->end;
-        $tevas->save();
+        $firm = new Firm;
+        $firm->name = $request->name;
+        $firm->city = $request->city;
+        $firm->address = $request->address;
+        $firm->start = $request->start;
+        $firm->end = $request->end;
+        $firm->save();
 
         return redirect()->back()->with('ok', 'Pridėta sėkmingai');
     }
@@ -69,24 +69,24 @@ class TevasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tevas $tevas)
+    public function edit(Firm $firm)
     {
-        return view('back.tevas.edit', [
-            'restaurant' => $tevas
+        return view('back.firm.edit', [
+            'restaurant' => $firm
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tevas $tevas)
+    public function update(Request $request, Firm $firm)
     {
-        $tevas->name = $request->name;
-        $tevas->city = $request->city;
-        $tevas->address = $request->address;
-        $tevas->start = $request->start;
-        $tevas->end = $request->end;
-        $tevas->save();
+        $firm->name = $request->name;
+        $firm->city = $request->city;
+        $firm->address = $request->address;
+        $firm->start = $request->start;
+        $firm->end = $request->end;
+        $firm->save();
 
         return redirect()->back()->with('ok', 'Informacija atnaujinta sėkmingai');
     }
@@ -94,10 +94,10 @@ class TevasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tevas $tevas)
+    public function destroy(Firm $firm)
     {
-        if (!$tevas->tablesConnection()->count()) {
-            $tevas->delete();
+        if (!$firm->tablesConnection()->count()) {
+            $firm->delete();
             return redirect()->back()->with('ok', 'Įrašas ištrintas sėkmingai');
         }
 

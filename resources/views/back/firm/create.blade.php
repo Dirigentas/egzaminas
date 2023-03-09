@@ -9,7 +9,7 @@
         <div class='card-header'>
             <h5 class="card-title text-center">Nauja kortelė</h5>
         </div>
-        <form class="card-body" action='{{route('tevas-store')}}' method='post' enctype="multipart/form-data">
+        <form class="card-body" action='{{route('firm-store')}}' method='post' enctype="multipart/form-data">
             <label for="exampleInputEmail1" class="form-label">Pavadinimas</label>
             <input required class="form-control form-control-lg mb-4" type="text" name="name" value="{{old('name')}}">
             <label for="exampleInputEmail1" class="form-label">Miestas</label>

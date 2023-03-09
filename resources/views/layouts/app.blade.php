@@ -51,18 +51,26 @@
                         @else
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">Restoranai</a>
+                            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">Maitinimo Įstaigos</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('tevas-index') }}">tevas sąrašas</a></li>
-                                <li><a class="dropdown-item" href="{{ route('tevas-create') }}">Pridėti tevas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('firm-index') }}">Maitinimo įstaigų sąrašas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('firm-create') }}">Pridėti maitinimo įstaigą</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">Valgiaraščiai</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('menu-index') }}">Valgiaraščių sąrašas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('menu-create') }}">Pridėti valgiaraštį</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">Patiekalai</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('vaikas-index') }}">vaikas sąrašas</a></li>
-                                <li><a class="dropdown-item" href="{{ route('vaikas-create') }}">Pridėti vaikas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('dish-index') }}">Patiekalų sąrašas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('dish-create') }}">Pridėti patiekalą</a></li>
                             </ul>
                         </li>
 
