@@ -23,17 +23,17 @@ class FrontController extends Controller
             $s = explode(' ', $request->s);
             
             if(count($s) == 1) {
-                $menu = Menu::where('name', 'like', '%'.$s[0].'%');
+                $menu = Firm::where('name', 'like', '%'.$s[0].'%');
             }
             else {
-                $menu = Menu::where('name', 'like', '%'.$s[0].'%'.$s[1].'%')->orWhere('name', 'like', '%'.$s[1].'%'.$s[0].'%');
+                $menu = Firm::where('name', 'like', '%'.$s[0].'%'.$s[1].'%')->orWhere('name', 'like', '%'.$s[1].'%'.$s[0].'%');
             }
         } else {      
             if ($request->id && $request->id != 'all') {
-                $menu = Menu::where('id', $request->id);
+                $menu = Firm::where('id', $request->id);
             }
             else {
-                $menu = Menu::where('id', '>', 0);
+                $menu = Firm::where('id', '>', 0);
             }
         }
 
@@ -47,15 +47,14 @@ class FrontController extends Controller
 
          $user = Auth::user();
 
-         $firm = Firm::all()->sortBy('name');
 
         return view('front.home', [
-            'menu' => $menu,
+            'firm' => $menu,
             'sortSelect' => Firm::SORT,
             'sortShow' => isset(Firm::SORT[$request->sort]) ? $request->sort : '',
             's' => $request->s ?? '',
             'user' => $user,
-            'firm' => $firm,
+            // 'firm' => $firm,
             'firmShow' => $request->id ? $request->id : '',
         ]);
     }
