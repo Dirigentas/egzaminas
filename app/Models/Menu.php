@@ -15,11 +15,6 @@ class Menu extends Model
     {
         return $this->hasMany(Dish::class, 'menu', 'name');
     }
-
-    const SORT = [
-        'asc_price' => 'Kaina nuo žemiausios',
-        'desc_price' => 'Kaina nuo didžiausios',
-    ];
 }
 
 ?>

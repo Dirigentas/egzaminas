@@ -16,6 +16,11 @@ class Firm extends Model
     {
         return $this->hasMany(Menu::class, 'firm', 'name');
     }
+
+    const SORT = [
+        'asc_name' => 'Pavadinimas A-Z',
+        'desc_name' => 'Pavadinimas Z-A',
+    ];
 }
 
 ?>

@@ -5,11 +5,8 @@ use App\Http\Controllers\FirmController as Firm;
 use App\Http\Controllers\MenuController as Menu;
 use App\Http\Controllers\DishController as Dish;
 use App\Http\Controllers\FrontController as F;
+use App\Http\Controllers\OrderController as O;
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::prefix('admin/firm')->name('firm-')->group(function () {
     Route::get('/index', [Firm::class, 'index'])->name('index')->middleware('roles:A');    
@@ -38,12 +35,25 @@ Route::prefix('admin/dish')->name('dish-')->group(function () {
     Route::delete('/destroy/{dish}', [Dish::class, 'destroy'])->name('destroy')->middleware('roles:A');    
 });
 
-Route::get('/', [F::class, 'index'])->name('index')->middleware('roles:A|K'); 
+Route::get('/index', [F::class, 'index'])->name('index')->middleware('roles:A|K'); 
+Route::get('/show/{firm}', [F::class, 'show'])->name('show')->middleware('roles:A|K');
+Route::post('add', [F::class, 'addToCart'])->name('add-to-cart');
+Route::get('/cart', [F::class, 'cart'])->name('cart');
+Route::post('/cart', [F::class, 'updateCart'])->name('update-cart');
+Route::post('/make-order', [F::class, 'makeOrder'])->name('make-order');
+
+
+Route::prefix('orders')->name('orders-')->group(function () {
+    Route::get('/index', [O::class, 'index'])->name('index')->middleware('roles:A|K');
+    Route::get('/pdf/{order}', [O::class, 'pdf'])->name('pdf')->middleware('roles:A|K');
+    Route::put('/update/{order}', [O::class, 'update'])->name('update')->middleware('roles:A');
+    Route::delete('/destroy/{order}', [O::class, 'destroy'])->name('destroy')->middleware('roles:A');
+});
 
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 ?>
