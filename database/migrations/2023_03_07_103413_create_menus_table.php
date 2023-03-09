@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name', 30)->unique();
+            $table->string('firm', 30);
+            $table->foreign('firm')->references('name')->on('firms');
         });
     }
 
@@ -25,3 +27,4 @@ return new class extends Migration
         Schema::dropIfExists('menus');
     }
 };
+?>

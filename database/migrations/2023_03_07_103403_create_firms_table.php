@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('firms', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name', 30)->unique();
+            $table->string('code', 30);
+            $table->string('address', 30);
         });
     }
 
@@ -25,3 +27,4 @@ return new class extends Migration
         Schema::dropIfExists('firms');
     }
 };
+?>

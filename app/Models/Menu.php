@@ -11,14 +11,9 @@ class Menu extends Model
 
     public $timestamps = false;
 
-    public function deletePhoto()
+    public function tablesConnection()
     {
-        if($this->photo){
-            $fileName = $this->photo;
-            unlink(public_path().$fileName);
-            $this->photo = null;
-            $this->save();
-        }
+        return $this->hasMany(Dish::class, 'menu', 'name');
     }
 
     const SORT = [

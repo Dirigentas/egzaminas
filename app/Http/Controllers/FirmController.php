@@ -39,15 +39,13 @@ class FirmController extends Controller
             $request->all(),
             [
             'name' => 'required|alpha|min:4|max:100',
-            'city' => 'required|alpha|min:3|max:50',
-            'start' => 'required|date_format:"H:i',
-            'end' => 'required|date_format:"H:i',
+            'code' => 'required|min:10|max:10',
+            'address' => 'required|min:10|max:50',
             ],
         [
-            'name' => 'Netinkamas vardo formatas',
-            'surncityame' => 'Netinkamas miesto formatas',
-            'start' => 'netinkamas laiko formatas',
-            'end' => 'netinkamas laiko formatas, turi būti vėlesnis nei pradžios laikas',
+            'name' => 'Netinkamas pavadinimo formatas',
+            'code' => 'Netinkamas kodo formatas',
+            'address' => 'netinkamas adreso formatas',
         ]);
 
             if ($validator->fails()) {
@@ -57,13 +55,11 @@ class FirmController extends Controller
 
         $firm = new Firm;
         $firm->name = $request->name;
-        $firm->city = $request->city;
+        $firm->code = $request->code;
         $firm->address = $request->address;
-        $firm->start = $request->start;
-        $firm->end = $request->end;
         $firm->save();
 
-        return redirect()->back()->with('ok', 'Pridėta sėkmingai');
+        return redirect()->back()->with('ok', 'Įstaiga pridėta sėkmingai');
     }
 
     /**
@@ -72,7 +68,7 @@ class FirmController extends Controller
     public function edit(Firm $firm)
     {
         return view('back.firm.edit', [
-            'restaurant' => $firm
+            'firm' => $firm
         ]);
     }
 
@@ -82,13 +78,11 @@ class FirmController extends Controller
     public function update(Request $request, Firm $firm)
     {
         $firm->name = $request->name;
-        $firm->city = $request->city;
+        $firm->code = $request->code;
         $firm->address = $request->address;
-        $firm->start = $request->start;
-        $firm->end = $request->end;
         $firm->save();
 
-        return redirect()->back()->with('ok', 'Informacija atnaujinta sėkmingai');
+        return redirect()->back()->with('ok', 'Įstaigos informacija atnaujinta sėkmingai');
     }
 
     /**

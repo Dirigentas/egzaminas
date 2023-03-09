@@ -40,26 +40,11 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $menu = new Menu;
-
-        if ($request->file('photo')) {
-            $photo = $request->file('photo');
-            
-            $ext = $photo->getClientOriginalExtension();
-            $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $file = $name. '-' . rand(100000, 999999). '.' . $ext;
-            
-
-            $photo->move(public_path().'/', $file);
-
-            $menu->photo = '/'. $file;
-        }
-
-        $menu->restaurant = $request->restaurant;
+        $menu->firm = $request->firm;
         $menu->name = $request->name;
-        $menu->price = $request->price;
         $menu->save();
 
-        return redirect()->back()->with('ok', 'Pridėta sėkmingai');
+        return redirect()->back()->with('ok', 'Meniu pridėtas sėkmingai');
     }
 
     /**
@@ -80,32 +65,11 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        if ($request->delete_photo) {
-            $menu->deletePhoto();
-            return redirect()->back();
-        }
-
-        if ($request->file('photo')) {
-            $photo = $request->file('photo');
-
-            $ext = $photo->getClientOriginalExtension();
-            $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $file = $name. '-' . rand(100000, 999999). '.' . $ext;
-            
-            if ($menu->photo) {
-                $menu->deletePhoto();
-            }
-            
-            $photo->move(public_path().'/', $file);
-            $menu->photo = '/'. $file;
-        }
-
-        $menu->restaurant = $request->restaurant;
+        $menu->firm = $request->firm;
         $menu->name = $request->name;
-        $menu->price = $request->price;
         $menu->save();
 
-        return redirect()->back()->with('ok', 'Informacija atnaujinta sėkmingai');
+        return redirect()->back()->with('ok', 'Meniu atnaujintas sėkmingai');
     }
 
     /**
@@ -113,10 +77,12 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        $menu->deletePhoto();
-        $menu->delete();
-        
-        return redirect()->back()->with('ok', 'Įrašas ištrintas sėkmingai');
+        if (!$menu->tablesConnection()->count()) {
+            $menu->delete();
+            return redirect()->back()->with('ok', 'Meniu ištrintas sėkmingai');
+        }
+
+        return redirect()->back()->with('not', 'Pašalinti įrašo negalima, yra susietų duomenų');
     }
 }
 
